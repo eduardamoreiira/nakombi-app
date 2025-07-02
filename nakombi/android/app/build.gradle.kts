@@ -3,10 +3,13 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // Add the dependency for the Google services Gradle plugin
+  
+    id("com.android.application")
 }
 
 android {
-    namespace = "com.example.nacombi"
+    namespace = "com.eduarda.nacombi"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -42,3 +45,4 @@ android {
 flutter {
     source = "../.."
 }
+
