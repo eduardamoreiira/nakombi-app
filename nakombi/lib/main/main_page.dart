@@ -4,6 +4,7 @@ import 'package:nacombi/categorias/pages/lista_categoria_page.dart';
 import 'package:nacombi/clientes/models/cliente_model.dart';
 import 'package:nacombi/clientes/pages/lista_clientes_page.dart';
 import 'package:nacombi/clientes/pages/profile_page.dart';
+import 'package:nacombi/caixa/pages/lista_caixa_page.dart';
 import 'package:nacombi/commons/my_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -60,7 +61,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
-            Container(color: Colors.greenAccent),
+            ListaCaixaPage(),
             Container(color: Colors.blueAccent),
             ProfilePage(),
           ][_index], //aqui adicionar o conteúdo da tela inicial
@@ -178,9 +179,7 @@ class _MainPageState extends State<MainPage> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder:
-                                        (context) =>
-                                            ListaCategoriaPage(), 
+                                    builder: (context) => ListaCategoriaPage(),
                                   ),
                                 );
                               },

@@ -4,17 +4,20 @@ class MyTextFormField extends StatelessWidget {
   MyTextFormField(
     this.label, {
     super.key,
-    required this.controller,
+    this.controller,
     this.initialValue,
+    this.onTap,
   });
   final String label;
-  final TextEditingController controller;
-  String? initialValue;
+  final TextEditingController? controller;
+  final String? initialValue;
+  void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0, top: 5),
       child: TextFormField(
+        onTap: onTap,
         initialValue: initialValue,
         controller: controller,
         decoration: InputDecoration(
