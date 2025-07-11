@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nacombi/categorias/services/categoria_services.dart';
-import 'package:nacombi/commons/my_card.dart';
 import 'package:nacombi/commons/my_textformfield.dart';
 import 'package:nacombi/categorias/models/categoria.dart';
 

@@ -42,7 +42,7 @@ class VendaModel {
       'cliente': cliente?.toMap(),
       'dataVenda': dataVenda?.millisecondsSinceEpoch,
       'observacao': observacao,
-      'itensVenda': itensVenda!.map((x) => x?.toMap()).toList(),
+      'itensVenda': itensVenda!.map((x) => x.toMap()).toList(),
     };
   }
 

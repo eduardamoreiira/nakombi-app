@@ -10,15 +10,15 @@ class ListaCategoriaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CategoriaServices _categoriaServices = CategoriaServices();
-    Categoria _categoria = Categoria();
+    CategoriaServices categoriaServices = CategoriaServices();
+    Categoria categoria = Categoria();
     return Scaffold(
       appBar: AppBar(
         title: Text('Lista de Categorias'),
         backgroundColor: const Color.fromARGB(255, 219, 132, 235),
       ),
       body: StreamBuilder(
-        stream: _categoriaServices.getCategorias(),
+        stream: categoriaServices.getCategorias(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Padding(
@@ -54,14 +54,14 @@ class ListaCategoriaPage extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          _categoria.id = ds.id;
-                          _categoria.nome = ds['nome'];
-                          _categoria.descricao = ds['descricao'];
+                          categoria.id = ds.id;
+                          categoria.nome = ds['nome'];
+                          categoria.descricao = ds['descricao'];
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder:
                                   (context) => EditarCategoriaPage(
-                                    categoria: _categoria,
+                                    categoria: categoria,
                                   ),
                             ),
                           );
@@ -70,8 +70,8 @@ class ListaCategoriaPage extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          _categoria.id = ds.id;
-                          CategoriaServices().excluirCategoria(_categoria);
+                          categoria.id = ds.id;
+                          CategoriaServices().excluirCategoria(categoria);
                         },
                         icon: Icon(Icons.delete, color: Colors.purple),
                       ),
@@ -91,8 +91,8 @@ class ListaCategoriaPage extends StatelessWidget {
             context,
           ).push(MaterialPageRoute(builder: (context) => AdicionarCategoria()));
         },
-        child: Text('+', style: TextStyle(fontSize: 14)),
         backgroundColor: Colors.purple,
+        child: Text('+', style: TextStyle(fontSize: 14)),
       ),
     );
   }

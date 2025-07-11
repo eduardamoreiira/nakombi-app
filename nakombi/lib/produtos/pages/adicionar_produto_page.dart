@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nacombi/produtos/service/produto_service.dart';
-import 'package:nacombi/commons/my_card.dart';
 import 'package:nacombi/commons/my_textformfield.dart';
-import 'package:nacombi/categorias/models/categoria.dart';
 
 class AdicionarProdutoPage extends StatelessWidget {
   AdicionarProdutoPage({super.key});

@@ -5,7 +5,7 @@ import 'package:nacombi/vendas/models/item_venda_model.dart';
 import 'package:nacombi/clientes/models/cliente_model.dart';
 
 class VendaService {
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   ClienteModel? cliente;
   List<ItemVendaModel> itensVenda = [];
 

@@ -100,6 +100,6 @@ extension on String? {
 
 extension on int? {
   toMap() {
-    return this != null ? this : 0;
+    return this ?? 0;
   }
 }

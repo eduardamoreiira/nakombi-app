@@ -10,7 +10,7 @@ class ListaClientesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ClienteServices _clienteServices = ClienteServices();
+    ClienteServices clienteServices = ClienteServices();
 
     return Scaffold(
       appBar: AppBar(
@@ -18,7 +18,7 @@ class ListaClientesPage extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 219, 132, 235),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _clienteServices.getClientes(),
+        stream: clienteServices.getClientes(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Padding(

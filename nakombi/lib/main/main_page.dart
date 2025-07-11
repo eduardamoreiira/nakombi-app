@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nacombi/categorias/pages/adicionar_categoria.dart';
 import 'package:nacombi/categorias/pages/lista_categoria_page.dart';
-import 'package:nacombi/clientes/models/cliente_model.dart';
 import 'package:nacombi/clientes/pages/lista_clientes_page.dart';
 import 'package:nacombi/clientes/pages/profile_page.dart';
 import 'package:nacombi/caixa/pages/lista_caixa_page.dart';
@@ -37,24 +35,39 @@ class _MainPageState extends State<MainPage> {
                     MyCard(
                       'Vendas',
                       'registrar',
-                      Colors.purple,
-                      Colors.purpleAccent,
+                      const Color.fromARGB(255, 243, 33, 215),
+                      const Color.from(
+                        alpha: 0.881,
+                        red: 0.561,
+                        green: 0.686,
+                        blue: 0.906,
+                      ),
                       child: Column(),
                     ),
                     SizedBox(height: 20),
                     MyCard(
                       'Locais',
                       'regiões',
-                      Colors.pink,
-                      Colors.pinkAccent,
+                      const Color.fromARGB(255, 243, 33, 215),
+                      const Color.from(
+                        alpha: 0.881,
+                        red: 0.561,
+                        green: 0.686,
+                        blue: 0.906,
+                      ),
                       child: Column(),
                     ),
                     SizedBox(height: 20),
                     MyCard(
                       'Clientes',
                       'quantidade',
-                      Colors.blue,
-                      Colors.blueAccent,
+                      const Color.fromARGB(255, 243, 33, 215),
+                      const Color.from(
+                        alpha: 0.881,
+                        red: 0.561,
+                        green: 0.686,
+                        blue: 0.906,
+                      ),
                       child: Column(),
                     ),
                   ],
