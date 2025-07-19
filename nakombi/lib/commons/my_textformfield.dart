@@ -6,12 +6,13 @@ class MyTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     this.initialValue,
-    this.onTap,
+    this.onTap, required TextInputType textType, required String labelText, required Null Function(dynamic value) onChanged, required String? Function(dynamic value) validator, required Null Function(dynamic value) onSaved,
   });
   final String label;
   final TextEditingController? controller;
   final String? initialValue;
   void Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

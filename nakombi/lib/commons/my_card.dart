@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
   const MyCard(
-    this.onTitle,
-    this.onLabel,
+    this.title,
+    this.label,
     this.onPrimary,
     this.onSecondary, {
     super.key,
-    required Column child,
   });
-
   final Color onPrimary;
   final Color onSecondary;
-  final String onTitle;
-  final String onLabel;
-  
-
+  final String title;
+  final String label;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,10 +21,9 @@ class MyCard extends StatelessWidget {
           colors: [onPrimary, onSecondary.withAlpha(70)],
           begin: AlignmentDirectional.topCenter,
           end: AlignmentDirectional.bottomCenter,
-
         ),
       ),
-      height: 180,
+      height: 170,
       width: 250,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -36,57 +31,58 @@ class MyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              onTitle,
+              title,
               style: TextStyle(
-                color: const Color.fromRGBO(255, 255, 255, 1),
+                color: Colors.white,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.pink.shade300,
+                color: Colors.red.shade300,
               ),
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Text(
-                onLabel,
+                label,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  '08/05/2025',
+                  '08/05/25',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 11,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15, child: VerticalDivider()),
+                SizedBox(height: 20, child: VerticalDivider()),
                 Text(
                   'Análise',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 11,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 5),
+
             ElevatedButton.icon(
               onPressed: () {},
-              label: Text('Visualizar', style: TextStyle(color: Colors.pink)),
-              icon: Icon(Icons.verified, color: Colors.pink),
+              label: Text('Visualizar', style: TextStyle(color: Colors.red)),
+              icon: Icon(Icons.verified),
             ),
           ],
         ),

@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:nacombi/categorias/pages/lista_categoria_page.dart';
-import 'package:nacombi/clientes/pages/lista_clientes_page.dart';
-import 'package:nacombi/clientes/pages/profile_page.dart';
-import 'package:nacombi/caixa/pages/lista_caixa_page.dart';
+import 'package:nacombi/caixa/pages/caixa_listagem_page.dart';
+import 'package:nacombi/caixa/services/caixa_services.dart';
+import 'package:nacombi/categoria/pages/categoria_lista_page.dart';
+import 'package:nacombi/clientes/pages/perfil_page.dart';
 import 'package:nacombi/commons/my_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
+import 'package:nacombi/utils/utils.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,77 +16,54 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
-//retorna para a aplicação a tela inicial
-//Scaffold é um widget que fornece uma estrutura básica para a tela
 
 class _MainPageState extends State<MainPage> {
-  bool isSelected = false; //variável para controlar o estado do ExpansionTile
-  int _index = 0; //variável para controlar o índice da tela inicial
+  int _index = 0;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          'Nakombi Baixa Gastronomia Cuiabana',
+          style: TextStyle(fontSize: 14),
+        ),
         centerTitle: true,
-        title: Text('Nakombi Baixa Gastronomia Cuiabana'),
       ),
       body:
           [
-            SingleChildScrollView(
-              child: Center(
+            Center(
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     MyCard(
                       'Vendas',
                       'registrar',
-                      const Color.fromARGB(255, 243, 33, 215),
-                      const Color.from(
-                        alpha: 0.881,
-                        red: 0.561,
-                        green: 0.686,
-                        blue: 0.906,
-                      ),
-                      child: Column(),
+                      Colors.blue,
+                      Colors.blueAccent,
                     ),
                     SizedBox(height: 20),
-                    MyCard(
-                      'Locais',
-                      'regiões',
-                      const Color.fromARGB(255, 243, 33, 215),
-                      const Color.from(
-                        alpha: 0.881,
-                        red: 0.561,
-                        green: 0.686,
-                        blue: 0.906,
-                      ),
-                      child: Column(),
-                    ),
+                    MyCard('Locais', 'regiões', Colors.green, Colors.green),
                     SizedBox(height: 20),
-                    MyCard(
-                      'Clientes',
-                      'quantidade',
-                      const Color.fromARGB(255, 243, 33, 215),
-                      const Color.from(
-                        alpha: 0.881,
-                        red: 0.561,
-                        green: 0.686,
-                        blue: 0.906,
-                      ),
-                      child: Column(),
-                    ),
+                    MyCard('Clientes', 'gerenciar', Colors.cyan, Colors.cyan),
                   ],
                 ),
               ),
             ),
-            ListaCaixaPage(),
+            CaixaListagemPage(),
             Container(color: Colors.blueAccent),
-            ProfilePage(),
-          ][_index], //aqui adicionar o conteúdo da tela inicial
+            PerfilPage(),
+          ][_index],
       bottomNavigationBar: NavigationBar(
+        height: 45.0,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+        indicatorColor: Colors.lightGreen.shade200,
+        labelTextStyle: WidgetStatePropertyAll(TextStyle(fontSize: 10)),
         selectedIndex: _index,
         onDestinationSelected: (value) {
           setState(() {
-            _index = value; //atualiza o índice da tela inicial
+            _index = value;
           });
         },
         destinations: [
@@ -92,10 +73,7 @@ class _MainPageState extends State<MainPage> {
             label: 'Vendas',
           ),
           NavigationDestination(icon: Icon(Icons.list), label: 'Relatórios'),
-          NavigationDestination(
-            icon: Icon(Icons.person_2),
-            label: 'Perfil de Usuário',
-          ),
+          NavigationDestination(icon: Icon(Icons.person_2), label: 'Sua Conta'),
         ],
       ),
       drawer: Drawer(
@@ -107,9 +85,9 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Image.asset(
-                      'assets/logo/kombi.jpeg',
+                      'assets/logo/kombi.jpg',
                       width: 50,
                       height: 50,
                     ),
@@ -134,12 +112,13 @@ class _MainPageState extends State<MainPage> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
+                    // SizedBox(child: DrawerHeader(child: Text('Nakombi Gastro'))),
                     Theme(
                       data: Theme.of(
                         context,
                       ).copyWith(dividerColor: Colors.transparent),
                       child: ExpansionTile(
-                        shape: Border(),
+                        // shape: Border(),
                         initiallyExpanded: isSelected,
                         leading: SvgPicture.asset(
                           isSelected
@@ -169,7 +148,7 @@ class _MainPageState extends State<MainPage> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => ListaCategoriaPage(),
+                                    builder: (context) => CategoriaListaPage(),
                                   ),
                                 );
                               },
@@ -179,60 +158,6 @@ class _MainPageState extends State<MainPage> {
                                   fontSize: 11,
                                   fontWeight: FontWeight.w400,
                                   color: TextTheme.of(context).bodySmall!.color,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 35.0),
-                            child: ListTile(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ListaCategoriaPage(),
-                                  ),
-                                );
-                              },
-                              title: Text(
-                                'Clientes',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w400,
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).textTheme.bodySmall!.color,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 35.0),
-                            child: ListTile(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) =>
-                                            ListaClientesPage(), // ou a tela correta de listagem de clientes
-                                  ),
-                                );
-                              },
-                              title: Text(
-                                'Produtos',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w400,
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).textTheme.bodySmall!.color,
                                 ),
                               ),
                             ),
@@ -294,4 +219,37 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+// ListView(
+//           padding: const EdgeInsets.symmetric(horizontal: 16),
+//           children: [
+//             SizedBox(child: DrawerHeader(child: Text('Nakombi Gastro'))),
+//             ExpansionTile(
+//               leading: SvgPicture.asset(isSelected ? 'assets/icons/home_filled.svg' : 'assets/icons/home_light.svg'),
+//               title: Text(
+//                 'Gerenciamento',
+//                 style: TextStyle(fontWeight: FontWeight.w600, color: TextTheme.of(context).bodyMedium!.color),
+//               ),
+//               children: [
+//                 ListTile(
+
+//                   onTap: () {
+//                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdicionarCategoria()));
+//                   },
+//                   title: Text(
+//                     'Categorias',
+//                     style: TextStyle(fontWeight: FontWeight.w600, color: TextTheme.of(context).bodyMedium!.color),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             ListTile(title: Text('Perfil de Usuário')),
+//           ],
+//         ),
+
+String _formatPubDate() {
+  DateTime date = DateTime.now();
+  DateFormat ptBrFormat = DateFormat('EEEE, dd/MM/y H:m', 'pt_BR');
+  return ptBrFormat.format(date);
 }
